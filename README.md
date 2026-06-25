@@ -1,4 +1,4 @@
-# streamlit_Apps
+# Streamlit_Apps
 This repository contains multiple Streamlit applications. 
 Use this index to navigate to each app.
 
