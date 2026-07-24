@@ -1,0 +1,41 @@
+Improve Image Deskewer into a packaged, tested Streamlit app (P0–P4).
+
+Turn the original flat demo (main/sui/funct) into the `dimage` package with
+stronger UX, post-processing, ops/deploy support, and a single dependency
+source in `pyproject.toml`.
+
+P0 — Project hygiene
+- Add .gitignore, MIT LICENSE, and a cleaned-up README
+- Replace over-pinned requirements freeze with packaging via pyproject.toml
+- Remove dead UI pieces and surface validation errors more clearly
+
+P1 — UX / product
+- Auto-order corners so click order no longer matters
+- Side-by-side original vs deskewed view, numbered corner preview
+- Clear points / reset canvas on new upload
+- EXIF orientation, upload size/dimension limits
+- Optional OpenCV auto-detect for document corners
+
+P2 — Quality & maintainability
+- Package layout: dimage/processing.py + dimage/ui.py, thin main.py
+- Type hints throughout; ruff + mypy configured in pyproject.toml
+- Pin Python (>=3.10,<3.13); switch to opencv-python-headless
+- Pytest suite for geometry, load/resize, deskew, detect, and helpers
+
+P3 — Performance & ops
+- Cache decoded/resized images in session_state across Streamlit reruns
+- Add .streamlit/config.toml (upload limit, theme defaults, stats off)
+- Dockerfile, .dockerignore, and GitHub Actions CI (ruff/mypy/pytest)
+- Document deploy paths (Docker / Community Cloud / Cloud Run)
+
+P4 — Nice-to-haves
+- Session deskew history with re-download
+- Post-warp rotate, crop margins, contrast, and sharpen
+- JPEG quality control; keyboard coordinate corner editor
+- Mobile/accessibility tips and in-session privacy note
+- Sidebar dark/light theme toggle
+
+Cleanup
+- Remove requirements.txt, requirements-dev.txt, and requirements-lock.txt
+- Use `pip install -e ".[dev]"` as the single install path
+- Align Dockerfile and CI with pyproject.toml-only dependencies
