@@ -1,0 +1,29 @@
+services:
+  transcription:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: transcription-app:local
+    container_name: transcription-app
+    ports:
+      - "${HOST_PORT:-8501}:8501"
+    environment:
+      TRANSCRIPTION_APP_PASSWORD: ${TRANSCRIPTION_APP_PASSWORD:-}
+      HF_HOME: /cache/huggingface
+      STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
+      STREAMLIT_SERVER_HEADLESS: "true"
+    volumes:
+      # Persist uploads, exports, and Whisper model downloads
+      - ./temp:/app/temp
+      - ./output:/app/output
+      - whisper-cache:/cache/huggingface
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8501/_stcore/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+
+volumes:
+  whisper-cache:

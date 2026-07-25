@@ -1,0 +1,30 @@
+Meeting Transcription App — Phases 1–6 + repo hygiene
+
+Stabilize and expand the local Streamlit + faster-whisper meeting transcription
+app through reliability, tests, ASR/export options, UX, advanced features, and
+Docker/ops packaging; then consolidate docs and dependency files.
+
+Phase 1 — Reliability: unique temp/export names, upload size/duration guards,
+wired temp cleanup, skip empty batch exports.
+
+Phase 2 — Hardening: mocked ASR/pipeline tests, pyproject + coverage gate,
+Streamlit config, GitHub CI.
+
+Theme: default dark theme with sidebar light/dark toggle.
+
+Phase 3 — ASR quality: device selector, hotwords/prompt, paragraph grouping,
+VTT export, duration-aware batch progress.
+
+Phase 4 — UX: ui/ package, audio seek-to-segment, editable transcript with
+re-export, batch filters/retry/cancel between files.
+
+Phase 5 — Advanced: video upload via ffmpeg, long-audio chunking, parallel
+batch workers, gap-based speaker labels, extractive summary/actions, optional
+password gate.
+
+Phase 6 — Ops: Dockerfile + Compose (ffmpeg, healthcheck, temp/output/model
+cache volumes), smoke_check.py, RELEASE_CHECKLIST, CI docker health job.
+
+Hygiene: rewrite README/.gitignore/ops docs for the current layout; merge
+requirements.txt and requirements-dev.txt; remove leftover temp artifacts and
+obsolete requirement file.
